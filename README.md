@@ -160,6 +160,7 @@ MusicTrends-Recommendation-MongoDB/
 ![image](https://github.com/user-attachments/assets/8435407a-d262-4002-93e0-9249997e1b1a)
 ![image](https://github.com/user-attachments/assets/48b9b091-6379-4e1d-b130-4ad207ddd5e6)
 ![image](https://github.com/user-attachments/assets/73fd6ade-b5d8-4537-960c-7234d5578f2e)
+![image](https://github.com/user-attachments/assets/1dfdbc58-43ce-4405-9932-d9d9d0b1c9c1)
 ![image](https://github.com/user-attachments/assets/34ac3aec-50d1-4ce3-a64c-125755424c5f)
 ![image](https://github.com/user-attachments/assets/360a1d2d-f811-451e-b216-61c2aa0ff118)
 ![image](https://github.com/user-attachments/assets/53a4e942-6a9e-4485-87f3-72a50bbdb76c)
