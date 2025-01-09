@@ -1,4 +1,4 @@
 *.log
 *.rar
 database/mongodb/*
-src/*
+__pycache__/
