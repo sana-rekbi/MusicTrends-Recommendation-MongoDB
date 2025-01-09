@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Music Trends</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trends">Trends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/statistics">Statistics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/find_similar">Find Similar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reviews">Reviews</a></li>
+                    {% if session.get('username') %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-5">
+        <h1>Reviews</h1>
+        <form action="/reviews" method="post" class="mb-4">
+            <div class="form-group">
+                <label for="search_type">Review Type:</label>
+                <select id="search_type" name="search_type" class="form-control" required>
+                    <option value="artist">Artist</option>
+                    <option value="album">Album</option>
+                    <option value="song">Song</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="artist">Artist:</label>
+                <input type="text" id="artist" name="artist" class="form-control" required>
+            </div>
+            <div class="form-group" id="album_group" style="display: none;">
+                <label for="album">Album:</label>
+                <input type="text" id="album" name="album" class="form-control">
+            </div>
+            <div class="form-group" id="song_group" style="display: none;">
+                <label for="song">Song:</label>
+                <input type="text" id="song" name="song" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Search Reviews</button>
+        </form>
+        <a href="{{ url_for('submit_reviews') }}" class="btn btn-secondary mb-4">Leave a Review</a>
+        {% if reviews %}
+            <div class="list-group">
+                {% for review in reviews[:10] %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ review.reviewer }} reviewed 
+                            {% if review.album %}
+                                the album <strong>{{ review.album }}</strong> by <strong>{{ review.artist }}</strong>
+                            {% elif review.song %}
+                                the song <strong>{{ review.song }}</strong> by <strong>{{ review.artist }}</strong>
+                            {% else %}
+                                the artist <strong>{{ review.artist }}</strong>
+                            {% endif %}
+                        </h5>
+                        <p class="mb-1">{{ review.review }}</p>
+                        <small>Rating: {{ review.rating }} / 5 | Date: {{ review.date.strftime('%Y-%m-%d') }}</small>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No reviews found.</p>
+        {% endif %}
+    </main>
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Music Trends. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('search_type').addEventListener('change', function() {
+            var searchType = this.value;
+            var albumGroup = document.getElementById('album_group');
+            var songGroup = document.getElementById('song_group');
+            if (searchType === 'album') {
+                albumGroup.style.display = 'block';
+                songGroup.style.display = 'none';
+            } else if (searchType === 'song') {
+                albumGroup.style.display = 'none';
+                songGroup.style.display = 'block';
+            } else {
+                albumGroup.style.display = 'none';
+                songGroup.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

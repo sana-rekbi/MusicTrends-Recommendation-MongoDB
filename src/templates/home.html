@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Trends</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function updateForm() {
+            const searchType = document.getElementById('search_type').value;
+            const keywordField = document.getElementById('keyword_field');
+            const artistField = document.getElementById('artist_field');
+            const albumField = document.getElementById('album_field');
+            const albumArtistField = document.getElementById('albumArtist_field');
+            const operatorField = document.getElementById('operator_field');
+            const thresholdField = document.getElementById('threshold_field');
+
+            const keywordInput = document.querySelector('input[name="keyword"]');
+            const artistInput = document.querySelector('input[name="artist"]');
+            const albumInput = document.querySelector('input[name="album"]');
+            const albumArtistInput = document.querySelector('input[name="album_artist"]');
+            const operatorInput = document.querySelector('select[name="operator"]');
+            const thresholdInput = document.querySelector('input[name="threshold"]');
+
+            keywordField.style.display = 'none';
+            artistField.style.display = 'none';
+            albumField.style.display = 'none';
+            albumArtistField.style.display = 'none';
+            operatorField.style.display = 'none';
+            thresholdField.style.display = 'none';
+
+            keywordInput.required = false;
+            artistInput.required = false;
+            albumInput.required = false;
+            albumArtistInput.required = false;
+            operatorInput.required = false;
+            thresholdInput.required = false;
+
+            if (searchType === 'tag') {
+                keywordField.style.display = 'block';
+                keywordInput.required = true;
+            } else if (searchType === 'album') {
+                albumArtistField.style.display = 'block';
+                albumField.style.display = 'block';
+                albumArtistInput.required = true;
+                albumInput.required = true;
+            } else if (searchType === 'artist') {
+                artistField.style.display = 'block';
+                artistInput.required = true;
+            } else if (searchType === 'artist_by_listens' || searchType === 'album_by_listens' || searchType === 'song_by_listens') {
+                operatorField.style.display = 'block';
+                thresholdField.style.display = 'block';
+                operatorInput.required = true;
+                thresholdInput.required = true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateForm(); 
+        });
+    </script>
+    <style>
+        .main-container {
+            padding-top: 20px;
+        }
+        .results-container {
+            margin-top: 30px;
+        }
+        .form-container {
+            margin-bottom: 40px;
+        }
+        .popular-albums {
+            margin-top: 20px;
+        }
+
+        .popular-albums h2 {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .popular-albums ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .popular-albums li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Music Trends</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trends">Trends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/find_similar">Find Similar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reviews">Reviews</a></li>
+                    
+                    {% if session.get('username') %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        
+
+
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>   
+    <main class="container main-container">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Welcome to Music Trends!</h1>
+            <p class="lead">Explore the latest trends and discover new music based on tags, albums, artists, and more.</p>
+         
+            
+        </div>
+        <div class="form-container">
+            {% if session.get('role') == 'admin' %}
+                <div class="alert alert-info">Logged in as Admin</div>
+            {% elif session.get('role') == 'user' %}
+                <div class="alert alert-info">Logged in as User: {{ session.get('username') }}</div>
+            {% else %}
+                <div class="alert alert-info">Logged in as Guest</div>
+            {% endif %}
+            <form action="/search" method="post" class="form-inline">
+                <div class="form-group mr-3">
+                    <label for="search_type" class="mr-2">Search Type:</label>
+                    <select name="search_type" id="search_type" class="form-control" onchange="updateForm()">
+                        <option value="tag">Tag</option>
+                        <option value="album">Album</option>
+                        <option value="artist">Artist</option>
+                        <option value="artist_by_listens">Artist by Listens</option>
+                        <option value="album_by_listens">Album by Listens</option>
+                        <option value="song_by_listens">Song by Listens</option>
+                    </select>
+                </div>
+                <div class="form-group mr-3" id="keyword_field" style="display: none;">
+                    <label for="keyword" class="mr-2">Keyword:</label>
+                    <input type="text" name="keyword" class="form-control" placeholder="Enter keyword">
+                </div>
+                <div class="form-group mr-3" id="artist_field" style="display: none;">
+                    <label for="artist" class="mr-2">Artist:</label>
+                    <input type="text" name="artist" class="form-control" placeholder="Enter artist">
+                </div>
+                <div class="form-group mr-3" id="album_field" style="display: none;">
+                    <label for="album" class="mr-2">Album:</label>
+                    <input type="text" name="album" class="form-control" placeholder="Enter album">
+                </div>
+                <div class="form-group mr-3" id="albumArtist_field" style="display: none;">
+                    <label for="album_artist" class="mr-2">Album Artist:</label>
+                    <input type="text" name="album_artist" class="form-control" placeholder="Enter album artist">
+                </div>
+                <div class="form-group mr-3" id="operator_field" style="display: none;">
+                    <label for="operator" class="mr-2">Operator:</label>
+                    <select name="operator" class="form-control">
+                        <option value="greater">Greater than</option>
+                        <option value="less">Less than</option>
+                    </select>
+                </div>
+                <div class="form-group mr-3" id="threshold_field" style="display: none;">
+                    <label for="threshold" class="mr-2">Threshold:</label>
+                    <input type="number" name="threshold" class="form-control" placeholder="Enter threshold">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <div class="recommendations">
+            <h2>Recommended for You</h2>
+            <ul>
+                {% if recommendations %}
+                    {% for rec in recommendations %}
+                        {% if rec.song and rec.artist %}
+                            <li>
+                                <strong>{{ rec.song }}</strong> by {{ rec.artist }}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <li>No recommendations available at the moment.</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="popular-albums">
+            <h2>Popular Albums</h2>
+            <button id="load-albums">Load Popular Albums</button>
+            <ul id="albums-list"></ul>
+        </div>
+        
+        <script>
+            // Charger les albums populaires dynamiquement
+            document.getElementById('load-albums').addEventListener('click', function() {
+                fetch('/popular_albums')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.albums) {
+                            const albumsList = document.getElementById('albums-list');
+                            albumsList.innerHTML = ''; // Réinitialiser la liste
+        
+                            data.albums.forEach(album => {
+                                const listItem = document.createElement('li');
+                                listItem.innerHTML = `<strong>${album.album_name}</strong> by ${album.artist} (Popularity: ${album.popularity})`;
+                                albumsList.appendChild(listItem);
+                            });
+                        } else {
+                            alert('No albums found!');
+                        }
+                    })
+                    .catch(error => console.error('Error fetching albums:', error));
+            });
+        </script>
+        <div class="playlists">
+            <h2>Your Playlists</h2>
+            <!-- Messages d'alerte -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="mt-3">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        
+            <ul id="playlists-list">
+                <!-- Les playlists existantes seront affichées ici dynamiquement -->
+                {% if playlists %}
+                    {% for playlist in playlists %}
+                        <li>
+                            <strong>{{ playlist.playlist_name }}</strong> - 
+                            {{ playlist.song_count }} songs
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>No playlists available. Create your first one below!</li>
+                {% endif %}
+            </ul>
+        
+            <h3>Create a New Playlist</h3>
+            <form action="/create_playlist" method="post" id="create-playlist-form">
+                <input type="text" name="playlist_name" placeholder="Playlist Name" class="form-control mb-2" required>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+        
+        
+        
+        
+        <div class="results-container">
+            {% if results %}
+                {% if session.get('role') == 'admin' %}
+                    <p class="text-info">Data source: {{ source }}</p>
+                {% endif %}
+                <div id="results">
+                    {% if results.tag %}
+                        <h2 class="text-center">{{ results.tag.name | upper }}</h2>
+                        <div>
+                            <h3>Summary:</h3>
+                            <p>{{ results.tag.wiki.summary | safe }}</p>
+                        </div>
+                        <div>
+                            <h3>Wiki:</h3>
+                            <p>{{ results.tag.wiki.content | safe }}</p>
+                        </div>
+                    {% elif results.album %}
+                        <h2 class="text-center">{{ results.album.name }}</h2>
+                        
+                        <div>
+                            <h3>Artist:</h3>
+                            <p>{{ results.album.artist }}</p>
+                        </div>
+                        <div>
+                            <h3>Number of Tracks:</h3>
+                            <p>{{ results.album.num_tracks }}</p>
+                        </div>
+                        <div>
+                            <h3>Total Duration:</h3>
+                            <p>{{ results.album.total_duration }} seconds</p>
+                        </div>
+                        <div>
+                            <h3>Publication Date:</h3>
+                            <p>{{ results.album.wiki.published if results.album.wiki else 'N/A' }}</p>
+                        </div>
+                    {% elif results.artist %}
+                        <h2 class="text-center">{{ results.artist.name }}</h2>
+                    
+                        {% if results.artist.bio %}
+                            <div>
+                                <h3>Bio:</h3>
+                                <p>{{ results.artist.bio.summary | safe }}</p>
+                            </div>
+                        {% endif %}
+                        {% if results.artist.similar and results.artist.similar.artist %}
+                            <div>
+                                <h3>Similar Artists:</h3>
+                                <ul>
+                                    {% for similar_artist in results.artist.similar.artist %}
+                                        <li>
+                                            <a href="{{ similar_artist.url }}">{{ similar_artist.name }}</a>
+                                        
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% if results.artist.albums %}
+                            <div>
+                                <h3>Albums:</h3>
+                                <ul>
+                                    {% for album in results.artist.albums %}
+                                        <li>{{ album }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% elif results[0].artist %}
+                        <h2 class="text-center">Artists by Listens</h2>
+                        <ul>
+                            {% for result in results %}
+                                <li>
+                                    <h3>{{ result.artist.name }}</h3>
+                                
+                                    <p>Playcount: {{ result.artist.stats.playcount }}</p>
+                                    <p>Listeners: {{ result.artist.stats.listeners }}</p>
+                                    <p><a href="{{ result.artist.url }}">More Info</a></p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% elif results[0].album %}
+                        <h2 class="text-center">Albums by Listens</h2>
+                        <ul>
+                            {% for result in results %}
+                                <li>
+                                    <h3>{{ result.album.name }}</h3>
+                                
+                                    <p>Artist: {{ result.album.artist }}</p>
+                                    <p>Playcount: {{ result.album.playcount }}</p>
+                                    <p>Listeners: {{ result.album.listeners }}</p>
+                                    <p><a href="{{ result.album.url }}">More Info</a></p>
+                                    {% if result.album.tracks and result.album.tracks.track %}
+                                        <h4>Tracks:</h4>
+                                        <ul>
+                                            {% for track in result.album.tracks.track %}
+                                                <li>{{ track.name }} ({{ track.duration }} seconds)</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% elif results[0].track %}
+                        <h2 class="text-center">Songs by Listens</h2>
+                        <ul>
+                            {% for result in results %}
+                                <li>
+                                    <h3>{{ result.track.name }}</h3>
+                                    <p>Artist: {{ result.track.artist.name }}</p>
+                                    <p>Album: {{ result.track.album.title }}</p>
+                            
+                                    <p>Duration: {{ result.track.duration }} ms</p>
+                                    <p>Playcount: {{ result.track.playcount }}</p>
+                                    <p>Listeners: {{ result.track.listeners }}</p>
+                                    <p><a href="{{ result.track.url }}">More Info</a></p>
+                                    <h4>Top Tags:</h4>
+                                    <ul>
+                                        {% for tag in result.track.toptags.tag %}
+                                            <li><a href="{{ tag.url }}">{{ tag.name }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% if result.track.wiki %}
+                                        <div>
+                                            <h4>Wiki:</h4>
+                                            <p>{{ result.track.wiki.summary | safe }}</p>
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% elif results.error %}
+                        <div class="alert alert-danger">{{ results.error }}</div>
+                    {% else %}
+                        <div class="alert alert-info">No results found.</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </main>
+    
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Music Trends. All rights reserved.</p>
+    </footer>
+</body>
+</html>

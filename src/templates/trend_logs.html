@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .main-content {
+            margin-top: 50px;
+        }
+        .trend-log h3 {
+            margin-top: 20px;
+        }
+        .trend-log ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .trend-log ul li {
+            background-color: #f8f9fa;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Music Trends</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trends">Trends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/find_similar">Find Similar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reviews">Reviews</a></li>
+                    {% if session.get('username') %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container main-content">
+        <h1 class="text-center">Trend Logs</h1>
+        <div class="text-left mt-4">
+            <a href="/trends" class="btn btn-secondary">Go back</a>
+        </div>
+        {% if logs %}
+        {% if session.get('role') == 'admin' %}
+        <p>Data source: {{ source }}</p>
+        {% endif %}
+            <div class="trend-log">
+                <ul>
+                    {% for log in logs %}
+                        <li>
+                            <h3>{{ log.type | capitalize }} - {{ log.last_updated.strftime('%Y-%m-%d %H:%M:%S') if log.last_updated else 'Unknown Date' }}</h3>
+                            {% if log.type == 'top_artists' and 'artists' in log %}
+                                <ul>
+                                    {% for artist in log.artists.artist %}
+                                        <li>{{ artist.name }} - {{ artist.playcount }} plays</li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif log.type == 'top_tracks' and 'tracks' in log %}
+                                <ul>
+                                    {% for track in log.tracks.track %}
+                                        <li>{{ track.name }} by {{ track.artist.name }} - {{ track.playcount }} plays</li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif log.type == 'top_tags' and 'tags' in log %}
+                                <ul>
+                                    {% for tag in log.tags.tag %}
+                                        <li>{{ tag.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No data available for this trend type.</p>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p class="text-center">No trend logs available.</p>
+        {% endif %}
+
+    
+    </main>
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Music Trends. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

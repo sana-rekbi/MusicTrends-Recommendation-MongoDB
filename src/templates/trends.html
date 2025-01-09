@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Trends</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        function updateForm() {
+            const searchType = document.getElementById('search_type').value;
+            const countryField = document.getElementById('country_field');
+            const artistField = document.getElementById('artist_field');
+            const countryInput = document.querySelector('input[name="country"]');
+            const artistInput = document.querySelector('input[name="artist"]');
+
+            countryField.style.display = 'none';
+            artistField.style.display = 'none';
+            countryInput.required = false;
+            artistInput.required = false;
+
+            if (searchType === 'top_tracks_by_country' || searchType === 'top_artists_by_country') {
+                countryField.style.display = 'block';
+                countryInput.required = true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateForm();  
+        });
+    </script>
+    <style>
+        .form-inline .form-group {
+            margin-right: 10px;
+        }
+        .form-inline .form-group:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Music Trends</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trends">Trends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/find_similar">Find Similar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reviews">Reviews</a></li>
+                    {% if session.get('username') %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>   
+    <main class="container mt-5">
+        <h1 class="text-center">Music Trends</h1>
+        <p class="text-center">Select what you want to search for and enter the keywords if needed.</p>
+        <form action="/trends" method="post" class="form-inline justify-content-center">
+            <div class="form-group">
+                <label for="search_type" class="mr-2">Search Type:</label>
+                <select name="search_type" id="search_type" class="form-control" onchange="updateForm()">
+                    <option value="top_tracks">Top Tracks</option>
+                    <option value="top_tags">Top Tags</option>
+                    <option value="top_tracks_by_country">Top Tracks by Country</option>
+                    <option value="top_artists_by_country">Top Artists by Country</option>
+                </select>
+            </div>
+            <div class="form-group" id="country_field" style="display: none;">
+                <label for="country" class="sr-only">Country</label>
+                <input type="text" name="country" class="form-control" placeholder="Enter country">
+            </div>
+            <div class="form-group" id="artist_field" style="display: none;">
+                <label for="artist" class="sr-only">Artist</label>
+                <input type="text" name="artist" class="form-control" placeholder="Enter artist">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        {% if results %}
+            {% if session.get('role') == 'admin' %}
+                <p>Data source: {{ source }}</p>
+            {% endif %}
+            <div id="results" class="mt-4">
+                {% if results.tracks %}
+                    <h2 class="text-center">Top Tracks</h2>
+                    <ul class="list-group">
+                        {% for track in results.tracks.track %}
+                            <li class="list-group-item">
+                                <p><strong>{{ track.name }}</strong> by <a href="{{ track.artist.url }}">{{ track.artist.name }}</a></p>
+                                <p>Playcount: {{ track.playcount }}</p>
+                                <p>Listeners: {{ track.listeners }}</p>
+                                <a href="{{ track.url }}">Listen on Last.fm</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% elif results.tags %}
+                    <h2 class="text-center">Top Tags</h2>
+                    <ul class="list-group">
+                        {% for tag in results.tags.tag %}
+                            <li class="list-group-item">{{ tag.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% elif results.toptracks %}
+                    <h2 class="text-center">Top Tracks in {{ results.toptracks['@attr'].country }}</h2>
+                    <ul class="list-group">
+                        {% for track in results.toptracks.track %}
+                            <li class="list-group-item">
+                                <p><strong>{{ track.name }}</strong> by {{ track.artist.name }}</p>
+                                <p>Playcount: {{ track.playcount }}</p>
+                                <a href="{{ track.url }}">Listen on Last.fm</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% elif results.topartists %}
+                    <h2 class="text-center">Top Artists in {{ results.topartists['@attr'].country }}</h2>
+                    <ul class="list-group">
+                        {% for artist in results.topartists.artist %}
+                            <li class="list-group-item">
+                                <p>{{ artist.name }}</p>
+                                <p>Listeners: {{ artist.listeners }}</p>
+                                <a href="{{ artist.url }}">More Info</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a href="/trend_logs" class="btn btn-secondary">View Trend Logs</a>
+        </div>
+    </main>
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Music Trends. All rights reserved.</p>
+    </footer>
+</body>
+</html>

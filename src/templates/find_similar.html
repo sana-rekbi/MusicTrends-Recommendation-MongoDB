@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Similar Albums and Songs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .main-content {
+            margin-top: 50px;
+        }
+        .form-inline .form-group {
+            margin-right: 10px;
+        }
+        .form-inline .form-group:last-child {
+            margin-right: 0;
+        }
+        .results h3, .results h4 {
+            margin-top: 20px;
+        }
+        .results ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .results ul li {
+            margin-bottom: 20px;
+        }
+        .results img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Music Trends</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trends">Trends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/find_similar">Find Similar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reviews">Reviews</a></li>
+                    {% if session.get('username') %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>   
+    <main class="container main-content">
+        <h1 class="text-center">Find Similar Albums and Songs</h1>
+        <p class="text-center">Enter the artist's name to find similar albums and songs.</p>
+        <form action="/find_similar" method="post" class="form-inline justify-content-center">
+            <div class="form-group">
+                <label for="artist" class="sr-only">Artist</label>
+                <input type="text" name="artist" class="form-control mr-2" placeholder="Enter artist name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        {% if results %}
+        <div id="results" class="results mt-5">
+            {% if session.get('role') == 'admin' %}
+            <p>Data source: {{ source }}</p>
+            {% endif %}
+            <h2>Similar Albums and Songs for {{ request.form['artist'] }}</h2>
+            <ul>
+                {% for result in results %}
+                    <li>
+                        <h3>{{ result.artist }}</h3>
+                        <div>
+                            <h4>Top Albums</h4>
+                            <ul class="list-group">
+                                {% for album in result.top_albums %}
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <img src="{{ album.image[0]['#text'] }}" alt="{{ album.name }}">
+                                        <div>
+                                            <p><strong>{{ album.name }}</strong></p>
+                                            <p>Playcount: {{ album.playcount }}</p>
+                                            <a href="{{ album.url }}">More Info</a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Top Tracks</h4>
+                            <ul class="list-group">
+                                {% for track in result.top_tracks %}
+                                    <li class="list-group-item">
+                                        <p><strong>{{ track.name }}</strong></p>
+                                        <p>Playcount: {{ track.playcount }}</p>
+                                        <a href="{{ track.url }}">Listen on Last.fm</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </main>
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Music Trends. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
