@@ -1,0 +1,4 @@
+*.log
+*.rar
+database/mongodb/*
+src/*
