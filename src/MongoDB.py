@@ -16,10 +16,15 @@ BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
 REQUEST_DELAY = 4  
 VALIDITY_PERIOD_HOURS = 72
 
+from pymongo import MongoClient
+
+# Connectez-vous avec l'URI fourni
+client = MongoClient("mongodb+srv://rekbisana23:xQKa6PU91udSm8vx@musictrendsdb.ttkdo.mongodb.net/MusicTrendsDB?retryWrites=true&w=majority")
+db = client["MusicTrendsDB"]  # Nom de votre base de données
 
 # MongoDB setup
-client = MongoClient('localhost', 27017)
-db = client['SD2024_projet']
+#client = MongoClient('localhost', 27017)
+#db = client['SD2024_projet']
 
 collections = ['GOAOK_artists', 'GOAOK_albums', 'GOAOK_tracks', 'GOAOK_tags', 'GOAOK_trends', 'GOAOK_reviews']
 for collection in collections:
