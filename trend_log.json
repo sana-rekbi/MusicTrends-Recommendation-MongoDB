@@ -1,0 +1,372 @@
+{
+    "artists": [],
+    "albums": [],
+    "tags": [],
+    "tracks": [
+        {
+            "date": "2024-05-23T12:51:53.606847",
+            "data": {
+                "tracks": {
+                    "track": [
+                        {
+                            "name": "espresso",
+                            "duration": "0",
+                            "playcount": "11626968",
+                            "listeners": "766084",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Sabrina+Carpenter/_/espresso",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Sabrina Carpenter",
+                                "mbid": "1882fe91-cdd9-49c9-9956-8e06a3810bd4",
+                                "url": "https://www.last.fm/music/Sabrina+Carpenter"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Not Like Us",
+                            "duration": "0",
+                            "playcount": "5957444",
+                            "listeners": "684053",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Kendrick+Lamar/_/Not+Like+Us",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Kendrick Lamar",
+                                "mbid": "381086ea-f511-4aba-bdf9-71c753dc5077",
+                                "url": "https://www.last.fm/music/Kendrick+Lamar"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "euphoria",
+                            "duration": "0",
+                            "playcount": "4568618",
+                            "listeners": "615615",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Kendrick+Lamar/_/euphoria",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Kendrick Lamar",
+                                "mbid": "381086ea-f511-4aba-bdf9-71c753dc5077",
+                                "url": "https://www.last.fm/music/Kendrick+Lamar"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "MILLION DOLLAR BABY",
+                            "duration": "0",
+                            "playcount": "4018243",
+                            "listeners": "554500",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Tommy+Richman/_/MILLION+DOLLAR+BABY",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Tommy Richman",
+                                "mbid": "",
+                                "url": "https://www.last.fm/music/Tommy+Richman"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Fortnight (feat. Post Malone)",
+                            "duration": "0",
+                            "playcount": "7657952",
+                            "listeners": "623688",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Taylor+Swift/_/Fortnight+(feat.+Post+Malone)",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Taylor Swift",
+                                "mbid": "20244d07-534f-4eff-b4d4-930878889970",
+                                "url": "https://www.last.fm/music/Taylor+Swift"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Like That",
+                            "duration": "0",
+                            "playcount": "7322581",
+                            "listeners": "640870",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Future/_/Like+That",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Future",
+                                "mbid": "9f1195cf-9900-45db-bf9c-21c205672ae0",
+                                "url": "https://www.last.fm/music/Future"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Lunch",
+                            "duration": "0",
+                            "playcount": "2409206",
+                            "listeners": "450837",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Billie+Eilish/_/Lunch",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Billie Eilish",
+                                "mbid": "",
+                                "url": "https://www.last.fm/music/Billie+Eilish"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Good Luck, Babe!",
+                            "duration": "0",
+                            "playcount": "7184533",
+                            "listeners": "488213",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Chappell+Roan/_/Good+Luck,+Babe%21",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Chappell Roan",
+                                "mbid": "",
+                                "url": "https://www.last.fm/music/Chappell+Roan"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Too Sweet",
+                            "duration": "0",
+                            "playcount": "6494489",
+                            "listeners": "616352",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Hozier/_/Too+Sweet",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Hozier",
+                                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                                "url": "https://www.last.fm/music/Hozier"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CHIHIRO",
+                            "duration": "0",
+                            "playcount": "2258972",
+                            "listeners": "399901",
+                            "mbid": "",
+                            "url": "https://www.last.fm/music/Billie+Eilish/_/CHIHIRO",
+                            "streamable": {
+                                "#text": "0",
+                                "fulltrack": "0"
+                            },
+                            "artist": {
+                                "name": "Billie Eilish",
+                                "mbid": "",
+                                "url": "https://www.last.fm/music/Billie+Eilish"
+                            },
+                            "image": [
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "small"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "medium"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "large"
+                                },
+                                {
+                                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                                    "size": "extralarge"
+                                }
+                            ]
+                        }
+                    ],
+                    "@attr": {
+                        "page": "1",
+                        "perPage": "10",
+                        "totalPages": "3848515",
+                        "total": "38485150"
+                    }
+                }
+            }
+        }
+    ]
+}

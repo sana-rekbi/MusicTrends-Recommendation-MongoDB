@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "664f2093e05cbce8951268fc"
+  },
+  "tag": {
+    "name": "rock",
+    "total": 4038931,
+    "reach": 400676,
+    "wiki": {
+      "summary": "Rock music is a genre of music started in America. It has its roots in 1940s and 1950s rock and roll and rockabilly, which evolved from blues, country music and other influences. According to the All Music Guide, “In its purest form, Rock & Roll has three chords, a strong, insistent back beat, and a catchy melody.  Early rock & roll drew from a variety of sources, primarily blues, R&B, and country, but also gospel, traditional pop, jazz, and folk. <a href=\"http://www.last.fm/tag/rock\">Read more on Last.fm</a>.",
+      "content": "Rock music is a genre of music started in America. It has its roots in 1940s and 1950s rock and roll and rockabilly, which evolved from blues, country music and other influences. According to the All Music Guide, “In its purest form, Rock & Roll has three chords, a strong, insistent back beat, and a catchy melody.  Early rock & roll drew from a variety of sources, primarily blues, R&B, and country, but also gospel, traditional pop, jazz, and folk. All of these influences combined in a simple, blues-based song structure that was fast, danceable, and catchy.” Rock usually has a prominent vocal melody, accompanied by guitar, drums, and bass. Many styles of rock music also use keyboard instruments such as organ, piano, mellotron, and synthesizers. Other instruments sometimes utilized in rock include saxophone (originally in the 50s the central instrument), harmonica, violin, flute, French horn, banjo, melodica, and timpani. Also, less common stringed instruments such as mandolin and sitar are used. Rock music usually has a strong back beat, and often revolves around the guitar, either solid electric, hollow electric, or acoustic.\n\nIn the late 1960s, rock music was blended with folk music to create folk rock, blues to create blues-rock and with jazz, to create jazz-rock fusion, and without a time signature to create psychedelic rock. In the 1970s, rock incorporated influences from soul, funk, and latin music. Also in the 1970s, rock developed a number of subgenres, such as soft rock, heavy metal, hard rock, progressive rock, and punk rock. Rock subgenres that emerged in the 1980s included synthpop, hardcore punk and alternative rock. In the 1990s, rock subgenres included grunge, Britpop, indie rock, and nu metal.\n\nA group of musicians specializing in rock music is called a rock band or rock group. Many rock groups consist of a guitarist, lead singer, bass guitarist, and drummer, forming a quartet. Some groups omit one or more of these roles and/or utilize a lead singer who plays an instrument while singing, forming a trio or duo; others include additional musicians such as one or two rhythm guitarists and/or a keyboardist. More rarely, groups also utilize stringed instruments such as violins or cellos, and/or horns like saxophones, trumpets or trombones. <a href=\"http://www.last.fm/tag/rock\">Read more on Last.fm</a>. User-contributed text is available under the Creative Commons By-SA License; additional terms may apply."
+    }
+  },
+  "last_updated": {
+    "$date": "2024-05-24T12:49:38.123Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "664f276ae05cbce895126be6"
+  },
+  "tag": {
+    "name": "вапролбдюж.з",
+    "total": 0,
+    "reach": 0,
+    "wiki": {
+      "summary": " <a href=\"http://www.last.fm/tag/%D0%B2%D0%B0%D0%BF%D1%80%D0%BE%D0%BB%D0%B1%D0%B4%D1%8E%D0%B6.%D0%B7\">Read more on Last.fm</a>.",
+      "content": ""
+    }
+  }
+}]

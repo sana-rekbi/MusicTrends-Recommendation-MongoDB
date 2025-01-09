@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "6650e969168a9b360260e9ba"
+  },
+  "username": "admin",
+  "password": "pbkdf2:sha256:600000$CQSTlHhc9nhcvmvO$c4173efcf1b46867eee3225c48ee4e1ee03954929ed616fb363dda8e361bd25a",
+  "is_admin": true
+},
+{
+  "_id": {
+    "$oid": "6650ead579abb7827478dbfe"
+  },
+  "username": "user",
+  "password": "pbkdf2:sha256:600000$PB4zNL0vKbywm8H9$f5d9b49827fd42aa181e2fb13edc66f3c29950d50160c637ebbfa374aa7ebee3",
+  "is_admin": false
+},
+{
+  "_id": {
+    "$oid": "66510798c0cb0976b2e73dde"
+  },
+  "username": "user2",
+  "password": "pbkdf2:sha256:600000$4mU3JB3hSJzPnMvx$29e4aa9590d912e56cae8709639b07cb28ce911690cafcd095f614d3c0364868",
+  "is_admin": false
+}]
