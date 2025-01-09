@@ -15,12 +15,15 @@ API_KEY = '26f21ff2e4773c9c6581ae2cd5ed55a0'
 BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
 REQUEST_DELAY = 4  
 VALIDITY_PERIOD_HOURS = 72
-
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
-# Connectez-vous avec l'URI fourni
-client = MongoClient("mongodb+srv://rekbisana23:xQKa6PU91udSm8vx@musictrendsdb.ttkdo.mongodb.net/MusicTrendsDB?retryWrites=true&w=majority")
-db = client["MusicTrendsDB"]  # Nom de votre base de données
+load_dotenv()  # Charge les variables d'environnement du fichier .env
+
+MONGODB_URI = os.getenv("MONGODB_URI")
+client = MongoClient(MONGODB_URI)
+db = client["MusicTrendsDB"]
 
 # MongoDB setup
 #client = MongoClient('localhost', 27017)
